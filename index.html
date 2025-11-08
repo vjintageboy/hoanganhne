@@ -1,194 +1,267 @@
-<!DOCTYPE html>
-<html lang="vi">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quản lý thông tin giáo viên - KTCLPM-N2</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body class="bg-gray-100 min-h-screen">
-    <div class="flex h-screen">
-        <!-- Sidebar -->
-        <aside class="w-64 bg-cyan-800 text-white shadow-md">
-            <div class="p-4 border-b border-blue-700">
-                <h1 class="text-xl font-bold">KTCLPM-N2</h1>
-                <p class="text-sm text-blue-200">Quản lý thông tin giáo viên</p>
-            </div>
-            <nav class="p-4">
-                <!-- Nhóm 1: Quản lý giáo viên -->
-                <p class="px-2 text-sm text-blue-200 mb-2 mt-2">Quản lý giáo viên</p>
-                <ul class="space-y-2 mb-4">
-                    <li>
-                        <a href="#" class="flex items-center p-2 text-white rounded active">
-                            <i class="fas fa-graduation-cap w-5"></i>
-                            <span>Bằng cấp</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" class="flex items-center p-2 text-white rounded">
-                            <i class="fas fa-building w-5"></i>
-                            <span>Khoa</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" class="flex items-center p-2 text-white rounded">
-                            <i class="fas fa-chalkboard-teacher w-5"></i>
-                            <span>Giáo viên</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" class="flex items-center p-2 text-white rounded">
-                            <i class="fas fa-chart-bar w-5"></i>
-                            <span>Thống kê giáo viên</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" class="flex items-center p-2 text-white rounded">
-                            <i class="fas fa-user-tie w-5"></i>
-                            <span>Phân công giảng viên</span>
-                        </a>
-                    </li>
-                </ul>
-                <!-- Nhóm 2: Quản lý lớp học phần -->
-                <p class="px-2 text-sm text-blue-200 mb-2 mt-2">Quản lý lớp học phần</p>
-                <ul class="space-y-2">
-                    <li>
-                        <a href="#" class="flex items-center p-2 text-white rounded">
-                            <i class="fas fa-book-open w-5"></i>
-                            <span>Học phần</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" class="flex items-center p-2 text-white rounded">
-                            <i class="fas fa-calendar-alt w-5"></i>
-                            <span>Kì học</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" class="flex items-center p-2 text-white rounded">
-                            <i class="fas fa-users w-5"></i>
-                            <span>Lớp học phần</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" class="flex items-center p-2 text-white rounded">
-                            <i class="fas fa-chart-line w-5"></i>
-                            <span>Thống kê lớp mở</span>
-                        </a>
-                    </li>
-                    <!-- UC3 Menu Items -->
-                    <li class="mt-4 border-t border-blue-700 pt-4">
-                        <p class="px-2 text-sm text-blue-200 mb-2">Tính tiền dạy</p>
-                        <ul class="space-y-2">
-                            <li>
-                                <a href="#uc3-4" class="flex items-center p-2 text-white rounded" data-section="uc3-4">
-                                    <i class="fas fa-calculator w-5"></i>
-                                    <span>Tính tiền</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            </nav>
-        </aside>
-
-        <!-- Main Content -->
-        <main class="flex-1 overflow-auto">
-            <div class="p-8">
-                <!-- Header -->
-                <div class="flex justify-between items-center mb-6">
-                    <h2 class="text-2xl font-bold text-gray-800">Danh sách Bằng cấp</h2>
-                    <button class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition-colors">
-                        <i class="fas fa-plus mr-2"></i>Thêm mới
-                    </button>
-                </div>
-
-                <!-- Search and Filter -->
-                <div class="bg-white p-4 rounded-lg shadow-md mb-6">
-                    <div class="flex gap-4">
-                        <div class="flex-1">
-                            <input type="text" placeholder="Tìm kiếm..." class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-blue-500">
-                        </div>
-                        <button class="bg-gray-100 px-4 py-2 rounded hover:bg-gray-200 transition-colors">
-                            <i class="fas fa-search"></i>
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Table -->
-                <div class="bg-white rounded-lg shadow-md overflow-hidden">
-                    <table class="min-w-full">
-                        <thead class="bg-gray-50">
-                            <tr>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">STT</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Tên đầy đủ</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Tên viết tắt</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Hành động</th>
-                            </tr>
-                        </thead>
-                        <tbody class="bg-white divide-y divide-gray-200">
-                            <tr>
-                                <td class="px-6 py-4 whitespace-nowrap">1</td>
-                                <td class="px-6 py-4">Tiến sĩ Khoa học Máy tính</td>
-                                <td class="px-6 py-4">TS.KHMT</td>
-                                <td class="px-6 py-4">
-                                    <button class="text-blue-500 hover:text-blue-700 mr-3">
-                                        <i class="fas fa-edit"></i>
-                                    </button>
-                                    <button class="text-red-500 hover:text-red-700">
-                                        <i class="fas fa-trash"></i>
-                                    </button>
-                                </td>
-                            </tr>
-                            <!-- Add more rows as needed -->
-                        </tbody>
-                    </table>
-                </div>
-
-                <!-- Pagination -->
-                <div class="mt-4 flex justify-between items-center">
-                    <div class="text-sm text-gray-700">
-                        Hiển thị 1-10 của 100 kết quả
-                    </div>
-                    <div class="flex gap-2">
-                        <button class="px-3 py-1 border rounded hover:bg-gray-100">Trước</button>
-                        <button class="px-3 py-1 border rounded bg-blue-500 text-white">1</button>
-                        <button class="px-3 py-1 border rounded hover:bg-gray-100">2</button>
-                        <button class="px-3 py-1 border rounded hover:bg-gray-100">3</button>
-                        <button class="px-3 py-1 border rounded hover:bg-gray-100">Sau</button>
-                    </div>
-                </div>
-            </div>
-        </main>
-    </div>
-
-    <!-- Modal Form -->
-    <div id="modal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center" style="display: none;">
-        <div class="bg-white rounded-lg p-6 w-full max-w-md">
-            <h3 class="text-xl font-bold mb-4">Thêm mới Bằng cấp</h3>
-            <form>
-                <div class="mb-4">
-                    <label class="block text-gray-700 text-sm font-bold mb-2">
-                        Tên đầy đủ <span class="text-red-500">*</span>
-                    </label>
-                    <input type="text" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-500" required>
-                </div>
-                <div class="mb-4">
-                    <label class="block text-gray-700 text-sm font-bold mb-2">
-                        Tên viết tắt
-                    </label>
-                    <input type="text" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-500">
-                </div>
-                <div class="flex justify-end gap-2">
-                    <button type="button" class="px-4 py-2 border rounded hover:bg-gray-100">Hủy</button>
-                    <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Lưu</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <script src="script.js"></script>
-</body>
-</html> 
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE> New Document </TITLE>
+<META NAME="Generator" CONTENT="EditPlus">
+<META NAME="Author" CONTENT="">
+<META NAME="Keywords" CONTENT="">
+<META NAME="Description" CONTENT="">
+<style>
+html, body {
+height: 100%;
+padding: 0;
+margin: 0;
+background: #000;
+}
+canvas {
+position: absolute;
+width: 100%;
+height: 100%;
+}
+.text {
+position: absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+color: #ea80b0;
+font-size: 32px;
+font-family: Arial, sans-serif;
+font-weight: bold;
+text-shadow: 0 0 10px rgba(234, 128, 176, 0.8);
+z-index: 10;
+white-space: nowrap;
+}
+@media (max-width: 768px) {
+.text {
+font-size: 24px;
+}
+}
+@media (max-width: 480px) {
+.text {
+font-size: 18px;
+}
+}
+</style>
+</HEAD>
+<BODY>
+<div class="text">Như Quỳnh đáng iu</div>
+<canvas id="pinkboard"></canvas>
+<script>
+/*
+* Settings
+*/
+var settings = {
+particles: {
+length:   500, // maximum amount of particles
+duration:   2, // particle duration in sec
+velocity: 100, // particle velocity in pixels/sec
+effect: -0.75, // play with this for a nice effect
+size:      30, // particle size in pixels
+},
+};
+/*
+* RequestAnimationFrame polyfill by Erik Möller
+*/
+(function(){var b=0;var c=["ms","moz","webkit","o"];for(var a=0;a<c.length&&!window.requestAnimationFrame;++a){window.requestAnimationFrame=window[c[a]+"RequestAnimationFrame"];window.cancelAnimationFrame=window[c[a]+"CancelAnimationFrame"]||window[c[a]+"CancelRequestAnimationFrame"]}if(!window.requestAnimationFrame){window.requestAnimationFrame=function(h,e){var d=new Date().getTime();var f=Math.max(0,16-(d-b));var g=window.setTimeout(function(){h(d+f)},f);b=d+f;return g}}if(!window.cancelAnimationFrame){window.cancelAnimationFrame=function(d){clearTimeout(d)}}}());
+/*
+* Point class
+*/
+var Point = (function() {
+function Point(x, y) {
+this.x = (typeof x !== 'undefined') ? x : 0;
+this.y = (typeof y !== 'undefined') ? y : 0;
+}
+Point.prototype.clone = function() {
+return new Point(this.x, this.y);
+};
+Point.prototype.length = function(length) {
+if (typeof length == 'undefined')
+return Math.sqrt(this.x * this.x + this.y * this.y);
+this.normalize();
+this.x *= length;
+this.y *= length;
+return this;
+};
+Point.prototype.normalize = function() {
+var length = this.length();
+this.x /= length;
+this.y /= length;
+return this;
+};
+return Point;
+})();
+/*
+* Particle class
+*/
+var Particle = (function() {
+function Particle() {
+this.position = new Point();
+this.velocity = new Point();
+this.acceleration = new Point();
+this.age = 0;
+}
+Particle.prototype.initialize = function(x, y, dx, dy) {
+this.position.x = x;
+this.position.y = y;
+this.velocity.x = dx;
+this.velocity.y = dy;
+this.acceleration.x = dx * settings.particles.effect;
+this.acceleration.y = dy * settings.particles.effect;
+this.age = 0;
+};
+Particle.prototype.update = function(deltaTime) {
+this.position.x += this.velocity.x * deltaTime;
+this.position.y += this.velocity.y * deltaTime;
+this.velocity.x += this.acceleration.x * deltaTime;
+this.velocity.y += this.acceleration.y * deltaTime;
+this.age += deltaTime;
+};
+Particle.prototype.draw = function(context, image) {
+function ease(t) {
+return (--t) * t * t + 1;
+}
+var size = image.width * ease(this.age / settings.particles.duration);
+context.globalAlpha = 1 - this.age / settings.particles.duration;
+context.drawImage(image, this.position.x - size / 2, this.position.y - size / 2, size, size);
+};
+return Particle;
+})();
+/*
+* ParticlePool class
+*/
+var ParticlePool = (function() {
+var particles,
+firstActive = 0,
+firstFree   = 0,
+duration    = settings.particles.duration;
+function ParticlePool(length) {
+// create and populate particle pool
+particles = new Array(length);
+for (var i = 0; i < particles.length; i++)
+particles[i] = new Particle();
+}
+ParticlePool.prototype.add = function(x, y, dx, dy) {
+particles[firstFree].initialize(x, y, dx, dy);
+// handle circular queue
+firstFree++;
+if (firstFree   == particles.length) firstFree   = 0;
+if (firstActive == firstFree       ) firstActive++;
+if (firstActive == particles.length) firstActive = 0;
+};
+ParticlePool.prototype.update = function(deltaTime) {
+var i;
+// update active particles
+if (firstActive < firstFree) {
+for (i = firstActive; i < firstFree; i++)
+particles[i].update(deltaTime);
+}
+if (firstFree < firstActive) {
+for (i = firstActive; i < particles.length; i++)
+particles[i].update(deltaTime);
+for (i = 0; i < firstFree; i++)
+particles[i].update(deltaTime);
+}
+// remove inactive particles
+while (particles[firstActive].age >= duration && firstActive != firstFree) {
+firstActive++;
+if (firstActive == particles.length) firstActive = 0;
+}
+};
+ParticlePool.prototype.draw = function(context, image) {
+// draw active particles
+if (firstActive < firstFree) {
+for (i = firstActive; i < firstFree; i++)
+particles[i].draw(context, image);
+}
+if (firstFree < firstActive) {
+for (i = firstActive; i < particles.length; i++)
+particles[i].draw(context, image);
+for (i = 0; i < firstFree; i++)
+particles[i].draw(context, image);
+}
+};
+return ParticlePool;
+})();
+/*
+* Putting it all together
+*/
+(function(canvas) {
+var context = canvas.getContext('2d'),
+particles = new ParticlePool(settings.particles.length),
+particleRate = settings.particles.length / settings.particles.duration, // particles/sec
+time;
+// get point on heart with -PI <= t <= PI
+function pointOnHeart(t) {
+return new Point(
+160 * Math.pow(Math.sin(t), 3),
+130 * Math.cos(t) - 50 * Math.cos(2 * t) - 20 * Math.cos(3 * t) - 10 * Math.cos(4 * t) + 25
+);
+}
+// creating the particle image using a dummy canvas
+var image = (function() {
+var canvas  = document.createElement('canvas'),
+context = canvas.getContext('2d');
+canvas.width  = settings.particles.size;
+canvas.height = settings.particles.size;
+// helper function to create the path
+function to(t) {
+var point = pointOnHeart(t);
+point.x = settings.particles.size / 2 + point.x * settings.particles.size / 350;
+point.y = settings.particles.size / 2 - point.y * settings.particles.size / 350;
+return point;
+}
+// create the path
+context.beginPath();
+var t = -Math.PI;
+var point = to(t);
+context.moveTo(point.x, point.y);
+while (t < Math.PI) {
+t += 0.01; // baby steps!
+point = to(t);
+context.lineTo(point.x, point.y);
+}
+context.closePath();
+// create the fill
+context.fillStyle = '#ea80b0';
+context.fill();
+// create the image
+var image = new Image();
+image.src = canvas.toDataURL();
+return image;
+})();
+// render that thing!
+function render() {
+// next animation frame
+requestAnimationFrame(render);
+// update time
+var newTime   = new Date().getTime() / 1000,
+deltaTime = newTime - (time || newTime);
+time = newTime;
+// clear canvas
+context.clearRect(0, 0, canvas.width, canvas.height);
+// create new particles
+var amount = particleRate * deltaTime;
+for (var i = 0; i < amount; i++) {
+var pos = pointOnHeart(Math.PI - 2 * Math.PI * Math.random());
+var dir = pos.clone().length(settings.particles.velocity);
+particles.add(canvas.width / 2 + pos.x, canvas.height / 2 - pos.y, dir.x, -dir.y);
+}
+// update and draw particles
+particles.update(deltaTime);
+particles.draw(context, image);
+}
+// handle (re-)sizing of the canvas
+function onResize() {
+canvas.width  = canvas.clientWidth;
+canvas.height = canvas.clientHeight;
+}
+window.onresize = onResize;
+// delay rendering bootstrap
+setTimeout(function() {
+onResize();
+render();
+}, 10);
+})(document.getElementById('pinkboard'));
+</script>
+</BODY>
+</HTML>
